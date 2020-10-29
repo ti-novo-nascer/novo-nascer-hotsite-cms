@@ -4,6 +4,9 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
+    /**
+     * Page metadata document
+     */
     {
       name: 'pageMetadata',
       title: 'Metadados da Página',
@@ -59,10 +62,53 @@ export default createSchema({
           validation: Rule => Rule.required().error('A localidade é obrigatória')
         },
         {
+          name: 'email',
+          title: 'Email',
+          type: 'string',
+          validation: Rule => Rule.required().error('O email é obrigatório')
+        },
+        {
           name: 'phone',
           title: 'Telefone',
           type: 'string',
           validation: Rule => Rule.required().error('O telefone é obrigatório')
+        }
+      ]
+    },
+    /**
+     * Page content document
+     */
+    {
+      name: 'pageContent',
+      title: 'Conteúdo da Página',
+      type: 'document',
+      fields: [
+        /**
+         * Header content
+         */
+        {
+          name: 'slug',
+          title: 'Slug',
+          type: 'slug',
+          validation: Rule => Rule.required().error('O slug é obrigatório')
+        },
+        {
+          name: 'headerTitle',
+          title: 'Título do Cabeçalho',
+          type: 'string',
+          validation: Rule => Rule.required().error('O título do cabeçalho é obrigatório')
+        },
+        {
+          name: 'headerSubtitle',
+          title: 'Subtítulo do Cabeçalho',
+          type: 'string',
+          validation: Rule => Rule.required().error('O subtítulo do cabeçalho é obrigatório')
+        },
+        {
+          name: 'headerCredits',
+          title: 'Créditos do Cabeçalho',
+          type: 'string',
+          validation: Rule => Rule.required().error('Os créditos do cabeçalho são obrigatórios')
         }
       ]
     }
