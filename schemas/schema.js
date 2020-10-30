@@ -4,111 +4,241 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
-    /**
-     * Page metadata document
-     */
     {
-      name: 'pageMetadata',
-      title: 'Metadados da Página',
+      name: 'pageData',
+      title: 'Dados da Página',
       type: 'document',
       fields: [
+        {
+          name: 'document',
+          title: 'Documento',
+          type: 'string'
+        },
         {
           name: 'slug',
           title: 'Slug',
-          type: 'slug',
-          validation: Rule => Rule.required().error('O slug é obrigatório')
+          type: 'slug'
         },
+        /**
+         * Metadata
+         */
         {
-          name: 'title',
-          title: 'Título',
-          type: 'string',
-          validation: Rule => [
-            Rule.required().error('O título é obrigatório'),
-            Rule.max(60).warning('O título ideal deve conter no máximo 60 caracteres')
+          name: 'metadata',
+          title: 'Metadados',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'organization',
+              title: 'Organização',
+              type: 'string'
+            },
+            {
+              name: 'description',
+              title: 'Descrição',
+              type: 'text',
+              rows: 2
+            },
+            {
+              name: 'url',
+              title: 'URL',
+              type: 'string'
+            },
+            {
+              name: 'image',
+              title: 'Imagem',
+              type: 'image'
+            },
+            {
+              name: 'locale',
+              title: 'Localidade',
+              type: 'string'
+            },
+            {
+              name: 'email',
+              title: 'Email',
+              type: 'string'
+            },
+            {
+              name: 'phone',
+              title: 'Telefone',
+              type: 'string'
+            }
           ]
         },
-        {
-          name: 'name',
-          title: 'Nome',
-          type: 'string',
-          validation: Rule => Rule.required().error('O nome é obrigatório')
-        },
-        {
-          name: 'description',
-          title: 'Descrição',
-          type: 'string',
-          validation: Rule => [
-            Rule.required().error('A descrição é obrigatória'),
-            Rule.min(50).warning('A descrição ideal deve conter no mínimo 50 caracteres'),
-            Rule.max(160).warning('A descrição ideal deve conter no máximo 160 caracteres')
-          ]
-        },
-        {
-          name: 'url',
-          title: 'URL',
-          type: 'string',
-          validation: Rule => Rule.required().error('A URL é obrigatória')
-        },
-        {
-          name: 'image',
-          title: 'Imagem',
-          type: 'image',
-          validation: Rule => Rule.required().error('A imagem é obrigatória')
-        },
-        {
-          name: 'locale',
-          title: 'Localidade',
-          type: 'string',
-          validation: Rule => Rule.required().error('A localidade é obrigatória')
-        },
-        {
-          name: 'email',
-          title: 'Email',
-          type: 'string',
-          validation: Rule => Rule.required().error('O email é obrigatório')
-        },
-        {
-          name: 'phone',
-          title: 'Telefone',
-          type: 'string',
-          validation: Rule => Rule.required().error('O telefone é obrigatório')
-        }
-      ]
-    },
-    /**
-     * Page content document
-     */
-    {
-      name: 'pageContent',
-      title: 'Conteúdo da Página',
-      type: 'document',
-      fields: [
         /**
          * Header content
          */
         {
-          name: 'slug',
-          title: 'Slug',
-          type: 'slug',
-          validation: Rule => Rule.required().error('O slug é obrigatório')
+          name: 'header',
+          title: 'Cabeçalho',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'slogan',
+              title: 'Slogan',
+              type: 'string'
+            },
+            {
+              name: 'credits',
+              title: 'Créditos',
+              type: 'string'
+            }
+          ]
         },
+        /**
+         * Presentation content
+         */
         {
-          name: 'headerTitle',
-          title: 'Título do Cabeçalho',
-          type: 'string',
-          validation: Rule => Rule.required().error('O título do cabeçalho é obrigatório')
+          name: 'presentation',
+          title: 'Apresentação',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'subtitle',
+              title: 'Subtítulo',
+              type: 'string'
+            },
+            {
+              name: 'text',
+              title: 'Texto',
+              type: 'array',
+              of: [
+                { type: 'block' }
+              ]
+            }
+          ]
         },
+        /**
+         * Article content
+         */
         {
-          name: 'headerSubtitle',
-          title: 'Subtítulo do Cabeçalho',
-          type: 'string',
-          validation: Rule => Rule.required().error('O subtítulo do cabeçalho é obrigatório')
+          name: 'article',
+          title: 'Artigo',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'subtitle',
+              title: 'Subtítulo',
+              type: 'string'
+            },
+            {
+              name: 'text',
+              title: 'Texto',
+              type: 'array',
+              of: [
+                { type: 'block' }
+              ]
+            }
+          ]
         },
+        /**
+         * Place content
+         */
         {
-          name: 'headerCredits',
-          title: 'Créditos do Cabeçalho',
-          type: 'string',
-          validation: Rule => Rule.required().error('Os créditos do cabeçalho são obrigatórios')
+          name: 'place',
+          title: 'Local',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'subtitle',
+              title: 'Subtítulo',
+              type: 'string'
+            },
+            {
+              name: 'photos',
+              title: 'Fotos',
+              type: 'array',
+              of: [
+                { type: 'image' }
+              ]
+            }
+          ]
+        },
+        /**
+         * Statistics content
+         */
+        {
+          name: 'statistics',
+          title: 'Estatísticas',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'subtitle',
+              title: 'Subtítulo',
+              type: 'string'
+            },
+            {
+              name: 'chart',
+              title: 'Gráfico',
+              type: 'image'
+            }
+          ]
+        },
+        /**
+         * Testimonials content
+         */
+        {
+          name: 'testimonials',
+          title: 'Depoimentos',
+          type: 'document',
+          fields: [
+            {
+              name: 'title',
+              title: 'Título',
+              type: 'string'
+            },
+            {
+              name: 'subtitle',
+              title: 'Subtítulo',
+              type: 'string'
+            },
+            {
+              name: 'statements',
+              title: 'Declarações',
+              type: 'array',
+              of: [
+                {
+                  name: 'statement',
+                  title: 'Declaração',
+                  type: 'object',
+                  fields: [
+                    { name: 'text', title: 'Texto', type: 'text' },
+                    { name: 'author', title: 'Autor', type: 'string' }
+                  ]
+                }
+              ]
+            },
+          ]
         }
       ]
     }
