@@ -118,7 +118,19 @@ export default createSchema({
               title: 'Texto',
               type: 'array',
               of: [
-                { type: 'block' }
+                { type: 'block' },
+                {
+                  title: 'Imagem',
+                  type: 'image',
+                  fields: [
+                    {
+                      name: 'caption',
+                      title: 'Legenda',
+                      type: 'string',
+                      options: { isHighlighted: true }
+                    }
+                  ]
+                }
               ]
             }
           ]
@@ -146,7 +158,19 @@ export default createSchema({
               title: 'Texto',
               type: 'array',
               of: [
-                { type: 'block' }
+                { type: 'block' },
+                {
+                  title: 'Imagem',
+                  type: 'image',
+                  fields: [
+                    {
+                      name: 'caption',
+                      title: 'Legenda',
+                      type: 'string',
+                      options: { isHighlighted: true }
+                    }
+                  ]
+                }
               ]
             }
           ]
